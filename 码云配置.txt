@@ -1,0 +1,20 @@
+1. 打开Git Bash
+	ssh-keygen -t rsa -C "zhangjushimuming@hotmail.com"
+	三次回车生成sshkey
+	cat ~/.ssh/id_rsa.pub  //查看公匙
+	打开码云SSH公钥管理页面 https://gitee.com/profile/sshkeys
+	ssh -T git@gitee.com
+	
+	初始化Git：
+	git config --global user.name yourname  # "你的名字或昵称"
+	git config --global user.email youremail@xxx.com # "你的邮箱"
+	
+	git init
+	git add README.md
+	git commit -m "first commit"
+	git remote add origin [name]
+	git push -u origin master
+	
+	删除远程git链接：
+	git remote rm origin
+		
