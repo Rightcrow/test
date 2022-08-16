@@ -1,0 +1,2 @@
+1. tftp
+	tftp -g -r photo_test 192.168.0.185

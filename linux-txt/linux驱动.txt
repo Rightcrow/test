@@ -1,0 +1,10 @@
+1. wifi驱动
+	realtek wifi驱动：8723ds
+
+	解压驱动到/BSP/linux-kernel/drivers/net/wireless/realtek
+
+	修改/realtek文件夹下的Kconfig文件：
+		添加：source "drivers/net/wireless/realtek/rtl8723ds/Kconfig"
+
+	修改/realtek文件夹下的Makefile文件：
+		添加：obj-$(CONFIG_RTL8XXXU)          += rtl8723ds/
