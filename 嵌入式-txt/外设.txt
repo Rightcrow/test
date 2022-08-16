@@ -86,3 +86,16 @@
 6. SPI串行总线
 	高速全双工总线 三条总线MISO MOSI SCK ，一条片选线S（NSS、CS）
 	片选信号线：从机片选信号线NSS与主机相连，主机将NSS设置为低，即为片选
+
+
+7. SDIO
+	SDIO总线：host-device ， 一个host连接多个device
+
+	传输模式：SPI（8引脚为中断信号）、1-bit、4-bit
+
+	1-bit模式：DAT1为中断线，DAT0传输数据
+	4-bit模式：DAT1为中断线，DAT0-DAT3传输数据
+
+	CMD：信号线发送命令
+
+	

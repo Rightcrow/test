@@ -1,9 +1,0 @@
-新生成密钥的时候，git clone或者push的时候，经常会报这样的错误：
-
-The authenticity of host 'github.com (20.205.243.166)' can't be established.
-ECDSA key fingerprint is SHA256:p2QAMXNIC1TJYWeIOttrVc98/R1BUFWu3/LiyKgUfQM.
-Are you sure you want to continue connecting (yes/no/[fingerprint])? 
-少了一个known_hosts文件，本来密钥文件应该是三个，现在是两个，就会报这样的错误，此时选择yes回车之后，即可，同时生成缺少的known_hosts文件
-
-
-Are you sure you want to continue connecting (yes/no)? //输入yes，回车
