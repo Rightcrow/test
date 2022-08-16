@@ -23,3 +23,10 @@
 	1. cd /lib/x86_64-linux-gnu/ 
 	2. sudo ln -s -f /usr/lib/libmpfr.so.6 /usr/lib/libmpfr.so.4
 
+5. wifi驱动编译问题：
+    fatal error: asm/bitsperlong.h: No such file or directory
+   $make  -C /lib/modules/`uname -r`/build M=`pwd` 
+   ./include/uapi/asm-generic/int-ll64.h:11:29: fatal error: asm/bitsperlong.h: No     such file or directory
+	用sudo make进行编译。
+	应该是root管理员配置的path环境变量的问题。使用默认用户配置的环境变量和		root用户不一样，导致sudo make的时候，使用了不同的库和编译工具。
+

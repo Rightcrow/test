@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="moshi">
+        <item>拍照+录像</item>
+        <item>拍照</item>
+        <item>录像</item>
+    </string-array>
+    <string-array name="tuxiang">
+        <item>1MP</item>
+        <item>2MP</item>
+        <item>3MP</item>
+        <item>4MP</item>
+        <item>5MP</item>
+        <item>6MP</item>
+        <item>7MP</item>
+        <item>8MP</item>
+        <item>9MP</item>
+        <item>10MP</item>
+        <item>11MP</item>
+        <item>12MP</item>
+        <item>13MP</item>
+        <item>14MP</item>
+        <item>15MP</item>
+        <item>16MP</item>
+        <item>17MP</item>
+        <item>18MP</item>
+        <item>19MP</item>
+        <item>20MP</item>
+    </string-array>
+    <string-array name="luxiang">
+        <item>1K</item>
+        <item>2K</item>
+        <item>3K</item>
+        <item>4K</item>
+    </string-array>
+    <string-array name="paizhaozhangshu">
+        <item>1张</item>
+        <item>2张</item>
+        <item>3张</item>
+        <item>4张</item>
+        <item>5张</item>
+    </string-array>
+    <string-array name="luxiangshijian">
+        <item>10s</item>
+        <item>30s</item>
+        <item>60s</item>
+        <item>120s</item>
+        <item>180s</item>
+        <item>300s</item>
+    </string-array>
+    <string-array name="jiangeshijian">
+        <item>10s</item>
+        <item>30s</item>
+        <item>60s</item>
+        <item>120s</item>
+        <item>180s</item>
+        <item>300s</item>
+    </string-array>
+    <string-array name="hongwailingmindu">
+        <item>极低</item>
+        <item>低</item>
+        <item>偏低</item>
+        <item>正常</item>
+        <item>偏高</item>
+        <item>高</item>
+        <item>极高</item>
+    </string-array>
+    <string-array name="shijianchuo">
+        <item>开</item>
+        <item>关</item>
+    </string-array>
+    <!-- Reply Preference -->
+    <string-array name="reply_entries">
+        <item>Reply</item>
+        <item>Reply to all</item>
+    </string-array>
+
+    <string-array name="reply_values">
+        <item>reply</item>
+        <item>reply_all</item>
+    </string-array>
+</resources>

@@ -1,0 +1,9 @@
+1. 单向链表
+	struct node
+	{
+		struct node *next； 下个节点
+		char data1;   数据
+		unsigned char array[];    数组数据
+		unsigned long *ptr;   指针数据
+	}
+

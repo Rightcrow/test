@@ -8,3 +8,5 @@
 3. linux系统版本查询
  	lsb_release -a
 	cat /etc/issue
+
+4. 文件文本查询 grep

@@ -1,0 +1,76 @@
+1. freertos移植
+	1. 进入官网下载源码
+	2. FreeRTOS/Source下的.c文件和include文件夹、portable文件夹
+	3. FreeRTOS/Source下的RVDS文件夹和MemMang文件夹
+	4. FreeRTOS/Demo/CORTEX_STM32F103_Keil下的FreeRTOSConfig.h
+	5. 在FreeRTOSConfig.h中加入头文件"stm32f10x.h"
+	6. 修改stm32f10x_it.c：
+		注释掉PendSV_Handler() , SVC_Handler()
+	7. 在main.c中加入头文件：
+		task.h , FreeRTOS.h
+	8. keil文件中CORE里添加：
+		core_cm3.c , startup_stm32f10x_hd.s
+	    FWLIB里添加：
+		misc.c , stm32f10x_adc.c等
+	    USER里添加：
+		main.c stm32f10x_it.c , system_stm32f10x.c , FreeRTOSConfig.h
+	    FreeRTOS/src添加：
+		croutine.c , list.c , queue.c 等
+	    FreeRTOS/port添加：
+		heap_4.c , port.c
+	9. keil中添加宏：
+		STM32F10X_HD,USE_STDPERIPH_DRIVER
+
+	10. FWLIB3.5中系统启动会调用system_stm32f10x.c中：
+		SystemInit()初始化时钟
+
+2. 任务创建：
+	静态任务：使用静态存储区内存
+	动态任务：堆区动态分配内存
+
+3. 动态任务代码：
+	1. 创建任务句柄指针
+	static TaskHandle_t AppTaskCreate_Handle = NULL;
+	static TaskHandle_t Beep_Task_Handle = NULL;
+
+	2. 创建AppTaskCreate函数、任务函数
+	static void AppTaskCreate(void)
+	{
+	BaseType_t xReturn = pdPASS;
+	
+	taskENTER_CRITICAL();
+	xReturn = xTaskCreate((TaskFunction_t)Beep_Task,
+												(const char*	 )"Beep_TASK",
+												(uint16_t			 )512,
+												(void *				 )NULL,
+												(UBaseType_t	 )2,
+												(TaskHandle_t* )&Beep_Task_Handle);
+	if (pdPASS == xReturn)
+	{
+		//printf("beep task success\r\n");
+	}
+	taskEXIT_CRITICAL();
+	
+	}
+	3. 创建主函数
+	int main(void)
+	{	
+	BaseType_t xReturn = pdPASS;
+	
+	BSP_Init();
+	xReturn = xTaskCreate((TaskFunction_t)AppTaskCreate,
+												(const char*	 )"AppTaskCreate",
+												(uint16_t			 )512,
+												(void *				 )NULL,
+												(UBaseType_t	 )1,
+												(TaskHandle_t* )&AppTaskCreate_Handle);
+	if (pdPASS == xReturn)
+	{
+		vTaskStartScheduler();
+	}
+	else
+	{
+		return -1;
+	}
+	while(1);
+	}

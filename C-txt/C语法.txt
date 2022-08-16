@@ -1,0 +1,43 @@
+1. 柔性数组
+	可定义可变长结构体
+	typedef struct st_type
+	{
+		int i;
+		int a[]
+	}type_a;
+	
+	分配内存
+	type_a *p=(type_a*)malloc(sizeof(type_a)+100*sizeof(int));
+
+2. ++ --
+	作为前缀：
+		先加或先剪
+
+3. 易错运算符优先级
+	*p.f  -->  . higher to *
+	int *ap[]  -->  [] higher to *
+	int *fp()  -->  () higher to *
+	(val & mask != 0)  -->  != higher to &
+	msb << 4+lsb  -->  运算高于移位
+	i = 1,2  -->  逗号优先级最低
+
+4. define容易出问题的部分
+	#define a 60*60*24*365  -->  #define a (60*60*24*365)UL
+	#define a(x)  x*x  --> #define (x)*(x)
+
+5. 结构体对齐
+	???
+
+6. ##运算符
+	粘合
+	#define X(n) x##n
+	X(8) --> x8
+
+7. 数组
+	数字组名a：表示首元素的首地址
+	&a：表示整个数组首地址
+
+8. 数组指针、指针数组
+	int *p[10];有十个只想int的指针
+	int (*p)[10];指针指向一个包含10个int类型的数组
+
