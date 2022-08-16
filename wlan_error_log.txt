@@ -1,0 +1,105 @@
+faile to get clock0 source
+id_0_i2c_addr not exist 
+h26x kdrv version: 0.3.9, nvt codec version 0.3.10.0
+nvt_vencrc: module license 'Proprietary' taints kernel.
+Disabling lock debugging due to kernel taint
+nvt_dispdev_module_init:
+panel_init:can not find logo node!
+panel_init:cfg file no exist 
+Hello, panel: PW35P00
+ubi1: default fastmap pool size: 8
+ubi1: default fastmap WL pool size: 4
+ubi1: attaching mtd8
+ubi1: scanning is finished
+ubi1: attached mtd8 (name "app", size 16 MiB)
+ubi1: PEB size: 131072 bytes (128 KiB), LEB size: 126976 bytes
+ubi1: min./max. I/O unit sizes: 2048/2048, sub-page size 2048
+ubi1: VID header offset: 2048 (aligned 2048), data offset: 4096
+ubi1: good PEBs: 128, bad PEBs: 0, corrupted PEBs: 0
+ubi1: user volume: 1, internal volumes: 1, max. volumes count: 128
+ubi1: max/mean erase counter: 0/0, WL threshold: 4096, image sequence number: 1475594499
+ubi1: available PEBs: 0, total reserved PEBs: 128, PEBs reserved for bad PEB handling: 30
+ubi1: background thread "ubi_bgt1d" started, PID 180
+UBIFS (ubi1:0): background thread "ubifs_bgt1_0" started, PID 186
+UBIFS (ubi1:0): UBIFS: mounted UBI device 1, volume 0, name "app"
+UBIFS (ubi1:0): LEB size: 126976 bytes (124 KiB), min./max. I/O unit sizes: 2048 bytes/2048 bytes
+UBIFS (ubi1:0): FS size: 10412032 bytes (9 MiB, 82 LEBs), journal size 1777664 bytes (1 MiB, 14 LEBs)
+UBIFS (ubi1:0): reserved for root: 0 bytes (0 KiB)
+UBIFS (ubi1:0): media format: w4/r0 (latest is w5/r0), UUID 3430EF71-FF08-4178-A8D1-FAE30B5DD5C2, small LPT model
+nvt_mmc f0420000.mmc: cd_gpio is invalid
+nvt_mmc f0420000.mmc: Using DMA, 4-bit mode sampling Positive edge, mmc0
+nvt_mmc f0500000.mmc: Using DMA, 4-bit mode sampling Positive edge, mmc1
+mmc1: queuing unknown CIS tuple 0x01 (3 bytes)
+mmc1: queuing unknown CIS tuple 0x1a (5 bytes)
+mmc1: queuing unknown CIS tuple 0x1b (8 bytes)
+mmc1: queuing unknown CIS tuple 0x14 (0 bytes)
+mmc1: queuing unknown CIS tuple 0x80 (1 bytes)
+mmc1: queuing unknown CIS tuple 0x81 (1 bytes)
+mmc1: queuing unknown CIS tuple 0x82 (1 bytes)
+mmc1: new high speed SDIO card at address 0001
+mmc0: new high speed SDHC card at address aaaa
+mmcblk0: mmc0:aaaa SC32G 29.7 GiB 
+ mmcblk0: p1
+FAT-fs (mmcblk0p1): Volume was not properly unmounted. Some data may be corrupt. Please run fsck.
+NET: Registered protocol family 1
+libphy: Fixed MDIO Bus: probed
+nvt_eth_env_probe: get IO MEM 0xfd2b0000
+nvt_eth_env_probe: pinmux detect emb phy 0x22
+DWC_ETH_QOS: Phy detected at ID/ADDR 0
+libphy: dwc_phy: probed
+nvt_resume: find node
+nvt_resume: led-inv = 0
+nvt_resume: pinmux 0x22
+Supports TSO, SG and TX COE
+Supports RX COE and GRO
+phydev exist: resume phy
+nvt_resume: find node
+nvt_resume: led-inv = 0
+nvt_resume: pinmux 0x22
+DWC_ETH_QOS_yinit: apb_clk 120000000 Hz
+Queue0 Tx fifo size 2048, Rx fifo size 2048
+Disabled JUMBO pkt
+Enabled Rx watchdog timer
+Enabled TSO
+Disabled Rx Split header mode
+phydev exist: start phy
+random: crng init done
+wlan: loading driver v4.5.25.57
+hifDeviceInserted: Dumping clocks (50000000,48000000)
+SDIO1 nvt_mmc_abort_data W sts 0x482
+SDIO1 nvt_mmc_abort_data R sts 0x444 (CMD53) 
+AR6000: SDIO bus operation failed! MMC stack returned : -110 
+__HIFReadWrite, addr:0X000800, len:00000004, Read , Sync 
+Unable to read HOST_INT_STATUS_ADDRESS register
+BMI : Unable to read response from device 
+Unable to read from the device
+Failed to read PLL_CONFIG Addr
+pll switch failed. status -1
+R0: wlan: [370:F :HIF]  hdd_wlan_startup failed
+tx_completion_task: tx completion task stopping
+SDIO1 nvt_mmc_abort_data W sts 0x444 (CMD53) 
+AR6000: SDIO bus operation failed! MMC stack returned : -110 
+__HIFReadWrite, addr:0X000868, len:00000004, Write, Sync 
+ar6k_wlan: probe of mmc1:0001:1 failed with error -1
+ath_hif_sdio: HIF (Atheros/multi-bss)
+R0: wlan: [370:E :HDD] hdd_hif_register_driver: 18378: hdd_wlan_startup failed status:-11 jiffies_left:14000
+R0: wlan: [370:F :HDD] hdd_driver_init: WLAN Driver Initialization failed
+AR6000: Unregistering with the bus driver
+AR6000: Unregistered!
+wlan: loading driver v4.5.25.57
+hifDeviceInserted: Dumping clocks (50000000,48000000)
+SDIO1 nvt_mmc_abort_data R sts 0x444 (CMD53) 
+AR6000: SDIO bus operation failed! MMC stack returned : -110 
+__HIFReadWrite, addr:0X000850, len:00000004, Read , Sync 
+Unable to decrement the command credit count register
+Unable to write to the device.
+R0: wlan: [370:F :HIF]  hdd_wlan_startup failed
+tx_completion_task: tx completion task stopping
+SDIO1 nvt_mmc_abort_data W sts 0x444 (CMD53) 
+AR6000: SDIO bus operation failed! MMC stack returned : -110 
+__HIFReadWrite, addr:0X000868, len:00000004, Write, Sync 
+ar6k_wlan: probe of mmc1:0001:1 failed with error -1
+ath_hif_sdio: HIF (Atheros/multi-bss)
+R0: wlan: [370:E :HDD] hdd_hif_register_driver: 18378: hdd_wlan_startup failed status:-11 jiffies_left:14000
+R0: wlan: [370:F :HDD] hdd_driver_init: WLAN Driver Initialization failed
+AR6000: Unregistering with the bus driver

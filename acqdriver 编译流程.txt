@@ -1,0 +1,16 @@
+1. 修改配置文件
+	/build/scripts/te-f30/config.te-f30
+	export KERNELPATH=/home/az/Desktop/nt98566/nt7/nt9856x_linux_sdk_release_uclibc_v1.01.004/BSP/linux-kernel
+export KERNELARCH=arm
+export TOOLPREFIX=/opt/arm-ca9-linux-uclibcgnueabihf-8.4.01/usr/bin/arm-ca9-linux-uclibcgnueabihf-
+
+2. 报错/vos_cnss.h   96
+	修改kernel_version 4.19.92
+
+3. 由于联咏linux内核电源管理PM无法配置，在编译过程中屏蔽报错的代码，最后完成编译
+
+4. 在开发板中加载insmod wlan.ko，无法加载成功
+
+5. 通过dmesg查看，发现缺少linux内核依赖
+	wlan: Unknown symbol __aeabi_uldivmod (err -2)
+	

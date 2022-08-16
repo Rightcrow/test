@@ -17,4 +17,5 @@
 	
 	删除远程git链接：
 	git remote rm origin
-		
+	
+	git pull origin master

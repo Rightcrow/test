@@ -1,0 +1,2 @@
+1. 进入fastboot_os路径
+	cd /home/az/Desktop/nt98566/fastboot_os/nt9856x_linux_sdk_release_uclibc_v1.01.004/BSP/linux-kernel/drivers/net/wireless/realtek
