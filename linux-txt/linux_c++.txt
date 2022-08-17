@@ -18,4 +18,6 @@
 
     内存泄漏：用scoped_ptr,对象析构时自动释放内存
 
-    
+5. share_ptr<Foo> *pFoo = new shared_ptr<Foo>(new Foo); //wrong
+    值语义，要么时栈上对象，其他对象直接数据成员，或标准容器元素：
+        这样值语义的一个巨大好处是生命期管理很简单
