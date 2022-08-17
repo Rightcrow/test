@@ -3,4 +3,19 @@
 
 2. composite（组合）在多线程不会有问题
     组合 (Composition) 指在一个类中另一类的对象作为数据成员
+    
     对象x生命周期由唯一拥有者owner控制，当owner析构，会把x析构
+
+3. 引用计数型智能指针shared_ptr/weak_ptr
+
+4. C++内存问题：
+    缓冲区溢出：用std::vector<char>/std::string或者自己编写的buffer class管理
+                缓冲区，自动记住长度，通过成员函数修改，不使用裸指针
+
+    空悬指针/野指针：用智能指针
+
+    重复释放：用scoped_ptr，在析构对象时释放一次
+
+    内存泄漏：用scoped_ptr,对象析构时自动释放内存
+
+    
