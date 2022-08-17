@@ -3,7 +3,7 @@
 	三次回车生成sshkey
 	cat ~/.ssh/id_rsa.pub  //查看公匙
 	打开码云SSH公钥管理页面 https://gitee.com/profile/sshkeys
-	ssh -T git@gitee.com
+	ssh -T git@gitee.com(github.com)
 	
 	初始化Git：
 	git config --global user.name yourname  # "你的名字或昵称"
