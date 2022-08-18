@@ -21,3 +21,66 @@
 5. share_ptr<Foo> *pFoo = new shared_ptr<Foo>(new Foo); //wrong
     值语义，要么时栈上对象，其他对象直接数据成员，或标准容器元素：
         这样值语义的一个巨大好处是生命期管理很简单
+
+6. RAII 
+    RAII正是利用这种机制，利用类来管理资源，将资源与类对象的生命周期绑定，即在
+    对象创建时获取对应的资源，在对象生命周期内控制对资源的访问，使之始终保持有
+    效，最后在对象析构时，释放所获取的资源。
+
+    对于系统中的资源不具有自动释放的功能， 而C++中的类具有自动调用析构函数的功能，
+    因此我们可以将资源用类进行封装起来，对资源的操作都封装在类的内部，在析构函
+    数中进行资源的释放。
+
+    class ArrayOperation 
+    { 
+    public : 
+    ArrayOperation() 
+    { 
+        m_Array = new int [10]; 
+    } 
+
+    void InitArray() 
+    { 
+        for (int i = 0; i < 10; ++i) 
+        { 
+            *(m_Array + i) = i; 
+        } 
+    } 
+
+    void ShowArray() 
+    { 
+        for (int i = 0; i <10; ++i) 
+        { 
+            cout<<m_Array[i]<<endl; 
+        } 
+    } 
+
+    ~ArrayOperation() 
+    { 
+        cout<< "~ArrayOperation is called" <<endl; 
+        if (m_Array != NULL ) 
+        { 
+            delete[] m_Array;  
+            m_Array = NULL ; 
+        } 
+    } 
+
+    private : 
+        int *m_Array; 
+    }; 
+
+    int main() 
+    { 
+        ArrayOperation arrayOp;    //创建一个资源对象
+        arrayOp.InitArray();       //获取资源
+        arrayOp.ShowArray();       //对资源进行操控，完成后自动释放资源
+        return 0;
+    }
+
+    在资源管理方面，智能指针(std::shared_ptr和std::unique_ptr)是RAII最具代表性
+    的实现，使用了智能指针，可以实现自动的内存管理，再也不用担心忘记delete造成内
+    存泄漏了。
+
+    在状态管理方面，线程同步中使用std::unique_lock或std::lock_guard对互斥量
+    std::mutex进行状态管理也是RAII的典型实现，通过这种方式，我们再也不用担心互
+    斥量之间的代码出现异常而造成线程死锁。
