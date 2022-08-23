@@ -22,65 +22,61 @@
     值语义，要么时栈上对象，其他对象直接数据成员，或标准容器元素：
         这样值语义的一个巨大好处是生命期管理很简单
 
-6. RAII 
-    RAII正是利用这种机制，利用类来管理资源，将资源与类对象的生命周期绑定，即在
-    对象创建时获取对应的资源，在对象生命周期内控制对资源的访问，使之始终保持有
-    效，最后在对象析构时，释放所获取的资源。
+6. 服务器基本框架
+    io处理单元--逻辑单元--网络存储单元
+    （各单元通过请求队列进行通信)
 
-    对于系统中的资源不具有自动释放的功能， 而C++中的类具有自动调用析构函数的功能，
-    因此我们可以将资源用类进行封装起来，对资源的操作都封装在类的内部，在析构函
-    数中进行资源的释放。
+    IO处理单元：等待并接受客户的连接，接受客户数据，将服务器响应数据返回给客户
+                端。
+    
+    逻辑单元：线程或进程，分析处理数据，传递结果给io处理单元，服务器有多个逻辑
+                单元，实现对多个客户任务进行处理。
+    
+    io处理单元接收到客户端请求，通过请求队列通知逻辑单元，通常实现为池的一部分
 
-    class ArrayOperation 
-    { 
-    public : 
-    ArrayOperation() 
-    { 
-        m_Array = new int [10]; 
-    } 
+7. IO模型
+    （1）阻塞IO
+    （2）IO复用：可监听多个IO事件
+    （3）SIGIO信号：信号触发读写就绪，用户程序执行读写操作，没有阻塞
+    （4）异步IO：内核执行读写操作，触发读写完成事件，没有阻塞
 
-    void InitArray() 
-    { 
-        for (int i = 0; i < 10; ++i) 
-        { 
-            *(m_Array + i) = i; 
-        } 
-    } 
+    服务器处理的主要三类事件：IO事件、信号、定时事件。
 
-    void ShowArray() 
-    { 
-        for (int i = 0; i <10; ++i) 
-        { 
-            cout<<m_Array[i]<<endl; 
-        } 
-    } 
+8. 事件处理模式
+    reactor：同步IO实现reactor模式
+    proactor：异步IO
 
-    ~ArrayOperation() 
-    { 
-        cout<< "~ArrayOperation is called" <<endl; 
-        if (m_Array != NULL ) 
-        { 
-            delete[] m_Array;  
-            m_Array = NULL ; 
-        } 
-    } 
+9. reactor：
+    主线程（IO处理单元）只监听文件描述符是否有事件，有事件则通知工作线程（逻辑
+    处理单元），主线程不做实质性工作，读写数据、接收新连接都由工作线程完成。
 
-    private : 
-        int *m_Array; 
-    }; 
+    主线程等待socket有数据可读，将socket可读事件放入请求队列；某工作线程被唤醒
+    从socket读数据、处理数据，往epoll_wait内核注册写就绪；主线程等待写就绪，将
+    写事件放入请求队列，工作线程被唤醒，处理。
 
-    int main() 
-    { 
-        ArrayOperation arrayOp;    //创建一个资源对象
-        arrayOp.InitArray();       //获取资源
-        arrayOp.ShowArray();       //对资源进行操控，完成后自动释放资源
-        return 0;
-    }
+10. proactor：
+    主线程（IO处理单元）和内核处理所有IO操作，工作线程负责业务逻辑。
+    
+    主线程调用aio_read函数向内核注册读完成事件，告诉内核用户读缓冲区位置，及
+    读操作完成时如何通知应用程序；主线出处理其他逻辑；数据接收读入用户缓冲区
+    后，内核向应用程序发送信号，通知数据可用；应用程序通过信号处理函数选择工
+    线程处理客户请求，向内核注册写完成事件，告诉内核缓冲区位置，以及写操作信
+    号通知应用程序；用户程序写入socket之后， 内核向应用程序发送信号，通知应
+    用程序数据已发送完毕；应用程序根据预定信号处理函数，决定是否关闭socket
+    等操作。
 
-    在资源管理方面，智能指针(std::shared_ptr和std::unique_ptr)是RAII最具代表性
-    的实现，使用了智能指针，可以实现自动的内存管理，再也不用担心忘记delete造成内
-    存泄漏了。
+11. 半同步、半异步
+    同步和异步区分在于，内核向应用程序通知是就绪事件还是完成事件，以及谁来
+    进行读写
 
+    并发模式中，同步是程序顺序执行，异步指程序执行由系统事件驱动（中断、信号）
+    
+    在该模式下，同步线程相当于逻辑处理单元，异步线程相当于IO处理单元。
+    异步线程监听到客户请求，将请求对象插入到请求队列；请求队列通知某个同步模式
+    的工作线程读取处理
+
+
+<<<<<<< HEAD
     在状态管理方面，线程同步中使用std::unique_lock或std::lock_guard对互斥量
     std::mutex进行状态管理也是RAII的典型实现，通过这种方式，我们再也不用担心互
     斥量之间的代码出现异常而造成线程死锁。
@@ -100,3 +96,27 @@
 
 8. signal(SIGPIPE, SIG_IGN)
     
+=======
+>>>>>>> e7357f6c6d70c1379755df6215bd8b254da56f2f
+
+12. unistd.h提供对 POSIX 操作系统 API 的访问功能的头文件的名称
+    unistd.h 中所定义的接口通常都是大量针对系统调用的封装
+    （英语：wrapper functions），如 fork、pipe 以及各种 
+    I/O 原语（read、write、close 等等）
+
+13. POSIX
+    可移植操作系统接口（Portable Operating System Interface，缩写
+    为POSIX）是IEEE为要在各种UNIX操作系统上运行软件，而定义API的一系列互
+    相关联的标准的总称，其正式称呼为IEEE Std 1003，而国际标准名称
+    为ISO/IEC 9945。此标准源于一个大约开始于1985年的项目。POSIX这个名称
+    是由理查德·斯托曼（RMS）应IEEE的要求而提议的一个易于记忆的名称。它基
+    本上是Portable Operating System Interface（可移植操作系统接口）的缩
+    写，而X则表明其对Unix API的传承。
+
+14. alarm() #include <unistd.h> #include <signal.h>
+    unsigned int alarm(unsigned int seconds);
+    signal(SIGALRM, sig_alarm);
+    void sig_alarm() 
+    { 
+        exit(0); 
+    } 
