@@ -84,3 +84,19 @@
     在状态管理方面，线程同步中使用std::unique_lock或std::lock_guard对互斥量
     std::mutex进行状态管理也是RAII的典型实现，通过这种方式，我们再也不用担心互
     斥量之间的代码出现异常而造成线程死锁。
+
+7. 并发编程
+    message passing：
+        在分布式系统中，让架构一致性变强，扩容容易。
+    
+    shared memory: 
+
+    线程同步原则：
+        使用并发编程构建：taskqueque等
+
+        只用非递归互斥器和条件变量，慎用读写锁，不要用信号量
+
+        除了atomic整数外，不自己编写lock-free代码，不用内核级别同步原语
+
+8. signal(SIGPIPE, SIG_IGN)
+    
